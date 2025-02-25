@@ -5,7 +5,6 @@ pathlib
 os-sys
 datetime
 pandas
-base64
 io
 json
 matplotlib
