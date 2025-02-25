@@ -378,8 +378,6 @@ st.set_page_config(
 try:
     from PIL import Image
 except ImportError:
-    import pip
-    pip.main(['install', 'pillow'])
     from PIL import Image
 
 # CSS personnalisé pour un design moderne
