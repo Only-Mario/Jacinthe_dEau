@@ -3,9 +3,6 @@ opencv-python
 numpy
 pathlib
 os-sys
-datetime
 pandas
-io
-json
 matplotlib
 pillow
