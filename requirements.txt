@@ -9,3 +9,4 @@ base64
 io
 json
 matplotlib
+pillow
