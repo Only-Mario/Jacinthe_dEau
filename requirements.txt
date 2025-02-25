@@ -1,11 +1,11 @@
 streamlit
-cv2
+opencv-python
 numpy
 pathlib
-os
-datetime 
+os-sys
+datetime
 pandas
 base64
-io 
+io
 json
 matplotlib
