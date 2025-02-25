@@ -1,0 +1,12 @@
+streamlit
+cv2
+numpy
+pathlib
+os
+datetime 
+pandas
+base64
+io 
+json
+matplotlib
+matplotlib
