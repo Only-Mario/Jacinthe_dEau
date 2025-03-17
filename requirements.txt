@@ -8,3 +8,4 @@ matplotlib
 pillow
 tensorflow
 ultralytics
+cv2
