@@ -10,7 +10,8 @@ from io import BytesIO
 import json
 import matplotlib.pyplot as plt
 import matplotlib
-matplotlib.use('Agg')  # Pour éviter les problèmes de thread avec Streamlit
+matplotlib.use('Agg')  
+from ultralytics import YOLO 
 
 # Deep Learning
 from tensorflow.keras.models import Sequential, load_model
@@ -131,6 +132,22 @@ def save_uploaded_image(uploaded_file, label):
         return None
 
 # Interface Streamlit
+# Fonction pour entourer l'image en rouge
+def draw_red_border(image):
+    """
+    Dessine un rectangle rouge autour de l'image.
+    """
+    image_np = np.array(image)  # Convertir l'image en tableau numpy
+    bordered_image = cv2.rectangle(
+        image_np,
+        (0, 0),  # Point de départ (coin supérieur gauche)
+        (image_np.shape[1] - 1, image_np.shape[0] - 1),  # Point final (coin inférieur droit)
+        (255, 0, 0),  # Couleur du rectangle (rouge en BGR)
+        10  # Épaisseur de la bordure
+    )
+    return Image.fromarray(bordered_image)  # Convertir en image PIL
+
+# Interface Streamlit
 uploaded_file = st.file_uploader("Téléchargez une image de jacinthe d'eau", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
@@ -174,7 +191,13 @@ if uploaded_file is not None:
                 img_array = np.expand_dims(img_array, axis=0)
                 prediction = model.predict(img_array)
                 
-                st.write(f"Prédiction : {'Jacinthe d\'eau' if prediction > 0.5 else 'Non jacinthe'}")
+                if prediction > 0.5:
+                    st.write("Prédiction : Jacinthe d'eau")
+                    # Entourer l'image en rouge
+                    bordered_image = draw_red_border(image)
+                    st.image(bordered_image, caption="Jacinthe d'eau détectée (entourée en rouge)", use_container_width=True)
+                else:
+                    st.write("Prédiction : Non jacinthe")
             except Exception as e:
                 st.error(f"Erreur lors de la prédiction : {e}")
     except Exception as e:
