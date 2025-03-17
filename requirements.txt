@@ -6,3 +6,4 @@ os-sys
 pandas
 matplotlib
 pillow
+tensorflow
